@@ -126,7 +126,8 @@
     }
 
     .letter-slot {
-      width: 38px;
+      min-width: 40px;
+      padding: 0 4px;
       height: 44px;
       border-radius: 10px;
       border: 1.5px dashed #d9c4bb;
@@ -533,7 +534,7 @@
       </div>
 
       <span class="badge" style="background: #fdf3e7; color: var(--gold-dark);">Gratulálok, Szerelmem!</span>
-      <h2 id="finalHeading">Megfejtetted a titkos kódot!</h2>
+      <h2 id="finalHeading">Gratulálok, megtaláltad a kincsem!</h2>
       <p class="subtitle" id="finalSubtext">Az összes betű a helyére került. Már csak az igazi meglepetésed átvétele maradt hátra:</p>
 
       <div class="final-gift-box">
@@ -570,18 +571,18 @@
         desc: "A lakásban elrejtettem a legszebb emlékeink darabkáit. Kövesd a nyomokat lépésről lépésre, használd az UV-fényt a kérdések elolvasásához, és fejtsd meg a titkot!"
       },
 
-      // Végső szó
+      // Végső szó (6 egység, mivel a 'CS' egyetlen betűként szerepel!)
       finalWord: "KINCSEM",
 
       // Végső leleplezés
       finalScreen: {
-        heading: "Büszke vagyok rád, minden nyomot megtaláltál!",
-        subtext: "Összeállt a végső kód. Már csak egyetlen rejtély maradt hátra:",
+        heading: "Gratulálok, megtaláltad a kincsem!",
+        subtext: "Összeállt a titkos kód, minden darabka a helyére került. Már csak egyetlen rejtély maradt hátra:",
         giftLocation: "A te igazi kincsed itt rejtőzik:<br><strong>Keresd a szoba legmelegebb pontját, ami a hideg téli estéken melegséggel tölti meg a teret... Kukkants alá! ✨</strong>"
       },
 
       // ÁLLOMÁSOK (Rejtélyes, szabadulószobás fejtörőkkel a helyszínekhez!)
-      // A kérdéseket NEM írjuk ki a képernyőre, mert azok a kézzel fogható cédulákon vannak UV tollal!
+      // K - I - N - CS - E - M (pontosan 6 állomás = 6 betű)
       clues: [
         {
           locationRiddle: "Keresd meg azt a különleges kis gépet, amitől a körmeid megszilárdulnak és ragyognak...",
@@ -605,17 +606,17 @@
         {
           locationRiddle: "Egy rejtett kis zug az ágyad mellett, ahol puha, ölelnivaló barátok pihennek egymás hegyén-hátán... Kutasd át a bundájuk mélyét!",
           acceptedAnswers: ["peugeot", "pozso", "pözsó", "pegeot", "peugot"],
-          letter: "C"
+          letter: "CS"
         },
         {
           locationRiddle: "A szoba, ahol a napod indul és zárul, a tükör fényei előtt. Kutasd át az asztal fiókjának a mélyét...",
           acceptedAnswers: ["kokeny", "kökény", "kokenyen", "kökényen"],
-          letter: "S"
+          letter: "E"
         },
         {
           locationRiddle: "Bárhová indulsz el a lakásból, szinte mindig magaddal viszed a válladon vagy a kezedben. Nyisd ki, és kutass a legféltettebb kincseid között...",
           acceptedAnswers: ["10", "tiz", "tíz"],
-          letter: "E"
+          letter: "M"
         }
       ],
 
@@ -631,7 +632,7 @@
        MOTOR ÉS LOGIKA
        ========================================================================= */
 
-    const STORAGE_KEY = "treasure_hunt_progress_v3";
+    const STORAGE_KEY = "treasure_hunt_progress_v5";
     let currentStep = 0;
     let collectedLetters = [];
 
@@ -689,8 +690,8 @@
 
     function renderSlots() {
       letterSlots.innerHTML = "";
-      // 7 betűs szó a cél (P A N D O R A)
-      const targetLength = GAME_CONFIG.finalWord.length;
+      // 6 betűfoglalat a cél: K - I - N - CS - E - M
+      const targetLength = GAME_CONFIG.clues.length;
       
       for (let i = 0; i < targetLength; i++) {
         const slot = document.createElement("div");
@@ -782,9 +783,9 @@
         screenFinal.classList.remove("hidden");
         trackerTitle.textContent = "A teljes kód megfejtve:";
 
-        // A legutolsó betűt is kitölti
-        if (collectedLetters.length < GAME_CONFIG.finalWord.length) {
-          collectedLetters = GAME_CONFIG.finalWord.split("");
+        // A végső szó összes betűjét feltölti
+        if (collectedLetters.length < GAME_CONFIG.clues.length) {
+          collectedLetters = ["K", "I", "N", "CS", "E", "M"];
           renderSlots();
         }
 
