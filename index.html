@@ -466,7 +466,7 @@
       <span class="badge" id="startBadge">Különleges Küldetés</span>
       <h1 id="startTitle">Egy kis közös kaland...</h1>
       <p class="subtitle" id="startDesc">
-        A lakásban elrejtettem a legszebb emlékeink darabkáit. Kövesd a nyomokat, használd az UV-fényt a cédulák elolvasásához, és fejtsd meg a végső titkot!
+        A lakásban elrejtettem a legszebb emlékeink darabkáit. Kövesd a nyomokat, és fejtsd meg a titkot!
       </p>
       <button class="btn" id="btnStartGame">
         <span>Első nyom megtekintése</span>
@@ -496,7 +496,7 @@
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"></path>
         </svg>
-        <span>A kérdést az elrejtett cédulán találod meg UV-fénnyel!</span>
+        <span>A kérdést az elrejtett cédulán találod meg!</span>
       </div>
 
       <p class="subtitle" id="clueCustomQuestion" style="font-size: 0.95rem; margin-bottom: 14px; font-weight: 500;">
@@ -568,7 +568,7 @@
       welcome: {
         badge: "Különleges Küldetés",
         title: "Egy kis közös kaland...",
-        desc: "A lakásban elrejtettem a legszebb emlékeink darabkáit. Kövesd a nyomokat lépésről lépésre, használd az UV-fényt a kérdések elolvasásához, és fejtsd meg a titkot!"
+        desc: "A lakásban elrejtettem a legszebb emlékeink darabkáit. Kövesd a nyomokat lépésről lépésre, és fejtsd meg a titkot!"
       },
 
       // Végső szó (6 egység, mivel a 'CS' egyetlen betűként szerepel!)
@@ -621,7 +621,7 @@
       ],
 
       errorMessages: [
-        "Majdnem! Nézd meg még egyszer alaposan az UV-lámpával...",
+        "Majdnem! Nézd meg még egyszer nagyon alaposan...",
         "Nem egészen ez a válasz, gondold át újra, Drágám!",
         "Próbáld újra! Biztosan eszedbe jut a közös emlékünk.",
         "Még egy próba! Ott van a nyelved hegyén!"
@@ -632,7 +632,7 @@
        MOTOR ÉS LOGIKA
        ========================================================================= */
 
-    const STORAGE_KEY = "treasure_hunt_progress_v5";
+    const STORAGE_KEY = "treasure_hunt_progress_v6";
     let currentStep = 0;
     let collectedLetters = [];
 
@@ -769,7 +769,7 @@
 
         clueStepBadge.textContent = `${currentStep}. Állomás / ${GAME_CONFIG.clues.length}`;
         clueLocation.textContent = currentClueData.locationRiddle;
-        clueCustomQuestion.textContent = "Fejtsd meg a helyszínt, olvasd el a cédulát UV-fénnyel, és írd be ide a választ:";
+        clueCustomQuestion.textContent = "Fejtsd meg a helyszínt, keresd meg a cédulát, és írd be ide a választ:";
 
         answerInput.value = "";
         answerInput.focus();
