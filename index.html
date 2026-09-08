@@ -407,6 +407,50 @@
       transform: scale(0.98);
     }
 
+    .cipher-box {
+      background: #ffffff;
+      border: 1.5px solid #dfcfc7;
+      border-radius: 14px;
+      padding: 14px 12px;
+      margin: 16px 0 20px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .cipher-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 10px;
+      border-radius: 9px;
+      background: #faf5f2;
+    }
+
+    .cipher-digits {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.18em;
+      color: var(--primary);
+      background: #ffffff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #ebdcd5;
+      min-width: 68px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      flex-shrink: 0;
+    }
+
+    .cipher-desc {
+      font-size: 0.84rem;
+      color: var(--text-main);
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
     .wax-seal-wrapper {
       margin: 22px auto 14px;
       display: flex;
@@ -520,7 +564,7 @@
       font-weight: 500;
     }
 
-    .pandora-brand {
+    .gift-dedication {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -655,24 +699,71 @@
 
       <!-- Prológus 3. Lépés: A Viaszpecsét Feltörése -->
       <div id="prologueStep3" class="hidden">
-        <span class="badge">Végső Próba • Fizikai Aktiválás</span>
-        <h2>A Viaszpecsét</h2>
+        <span class="badge">Végső Próba • A Pecsét Rejtvénye</span>
+        <h2>A Viaszpecsét Kódja</h2>
         <p class="subtitle" style="margin-bottom: 8px;">
-          A logikai zárak feloldva. Már csak az eredeti pecsét tartja fogva a helyszíneket:
+          A viaszpecsétet egy 3 számjegyből álló kombinációs zár tartja fogva. Kyle Butchler ezt a logikai feladványt hagyta hátra a felnyitásához:
         </p>
-        <div class="story-quote">
-          „A kincs nem a képernyőn él, hanem a szobátok rejtett zugaiban pihen. Törd fel a viaszpecsétet a keresés megkezdéséhez!”
+        
+        <div class="cipher-box">
+          <div class="cipher-rule">
+            <div class="cipher-digits">6 8 2</div>
+            <div class="cipher-desc">Egy szám helyes, és a helyén van.</div>
+          </div>
+          <div class="cipher-rule">
+            <div class="cipher-digits">6 1 4</div>
+            <div class="cipher-desc">Egy szám helyes, de rossz helyen áll.</div>
+          </div>
+          <div class="cipher-rule">
+            <div class="cipher-digits">2 0 6</div>
+            <div class="cipher-desc">Két szám helyes, de rossz helyen állnak.</div>
+          </div>
+          <div class="cipher-rule">
+            <div class="cipher-digits">7 3 8</div>
+            <div class="cipher-desc">Egyik szám sem része a kódnak.</div>
+          </div>
+          <div class="cipher-rule">
+            <div class="cipher-digits">7 8 0</div>
+            <div class="cipher-desc">Egy szám helyes, de rossz helyen áll.</div>
+          </div>
         </div>
+
         <div class="wax-seal-wrapper">
-          <div class="wax-seal" id="waxSealBtn" title="Koppints a pecsét feltöréséhez!">
+          <div class="wax-seal" id="waxSealBtn" title="3 számjegyű kód szükséges a pecsét feltöréséhez">
             KB
           </div>
-          <span id="waxSealHint" style="font-size: 0.82rem; color: var(--text-muted); font-style: italic;">
-            (Koppints a pecsétre a feltöréshez!)
-          </span>
+          <div id="sealInputContainer" style="width: 100%; max-width: 270px; margin-top: 4px;">
+            <input 
+              type="text" 
+              id="inputSealCode" 
+              maxlength="3" 
+              inputmode="numeric" 
+              pattern="[0-9]*" 
+              placeholder="3 jegyű kód" 
+              autocomplete="off"
+              style="text-align: center; letter-spacing: 0.28em; font-size: 1.25rem; font-weight: 700; width: 100%; margin-bottom: 10px; padding: 13px;"
+            />
+            <button class="btn" id="btnUnlockSeal">
+              <span>Pecsét feltörése</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="feedback-message" id="feedbackPrologue3"></div>
+          <div>
+            <button type="button" id="btnToggleSealHint" style="background: none; border: none; font-size: 0.8rem; color: var(--text-muted); cursor: pointer; text-decoration: underline; margin-top: 6px;">
+              Segítség a logikához
+            </button>
+            <div id="sealHintText" class="hidden" style="margin-top: 8px; font-size: 0.82rem; color: #7a5d53; background: #faf3ee; padding: 12px; border-radius: 10px; text-align: left; line-height: 1.5; border: 1px dashed #dfcfc7;">
+              💡 <strong>Lépésről lépésre:</strong><br>
+              • A 4. sor szerint a <code>7, 3, 8</code> kizárható – húzd ki őket mindenhol!<br>
+              • Az 5. sorból a <code>0</code> marad meg, tehát benne van, de nem az utolsó helyen.<br>
+              • Az 1. és 2. sor kizárja a <code>6</code>-ost, így a <code>2</code> az utolsó számjegy!
+            </div>
+          </div>
         </div>
-        <div class="feedback-message" id="feedbackPrologue3"></div>
-        <button class="btn hidden" id="btnStartPhysicalHunt" style="margin-top: 14px;">
+        <button class="btn hidden" id="btnStartPhysicalHunt" style="margin-top: 18px;">
           <span>Első szobai nyom megtekintése</span>
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
@@ -749,7 +840,7 @@
           A te igazi kincsed itt vár rád:<br>
           <strong>Keresd a szoba legmelegebb pontját, ami a hideg téli estéken felmelegít... Kukkants alá! ✨</strong>
         </div>
-        <div class="pandora-brand">
+        <div class="gift-dedication">
           <span>A Kincsemnek</span> • <span>Tiszta Szívből</span>
         </div>
       </div>
@@ -838,7 +929,7 @@
        MOTOR ÉS LOGIKA
        ========================================================================= */
 
-    const STORAGE_KEY = "treasure_hunt_progress_v7";
+    const STORAGE_KEY = "treasure_hunt_progress_v8";
     let currentStep = 0;
     let prologueStep = 1;
     let collectedLetters = [];
@@ -893,7 +984,11 @@
     const feedbackPrologue2 = document.getElementById("feedbackPrologue2");
 
     const waxSealBtn = document.getElementById("waxSealBtn");
-    const waxSealHint = document.getElementById("waxSealHint");
+    const sealInputContainer = document.getElementById("sealInputContainer");
+    const inputSealCode = document.getElementById("inputSealCode");
+    const btnUnlockSeal = document.getElementById("btnUnlockSeal");
+    const btnToggleSealHint = document.getElementById("btnToggleSealHint");
+    const sealHintText = document.getElementById("sealHintText");
     const feedbackPrologue3 = document.getElementById("feedbackPrologue3");
     const btnStartPhysicalHunt = document.getElementById("btnStartPhysicalHunt");
 
@@ -984,6 +1079,14 @@
           pDot1.className = "prologue-dot active";
           pDot2.className = "prologue-dot";
           pDot3.className = "prologue-dot";
+          waxSealBtn.classList.remove("broken");
+          sealInputContainer.classList.remove("hidden");
+          btnToggleSealHint.classList.remove("hidden");
+          sealHintText.classList.add("hidden");
+          btnStartPhysicalHunt.classList.add("hidden");
+          inputSealCode.value = "";
+          feedbackPrologue3.className = "feedback-message";
+          feedbackPrologue3.textContent = "";
         } else if (prologueStep === 2) {
           prologueStep1.classList.add("hidden");
           prologueStep2.classList.remove("hidden");
@@ -1176,16 +1279,50 @@
       }
     });
 
-    // Prológus 3. Lépés: Viaszpecsét feltörése
+    // Prológus 3. Lépés: Viaszpecsét kombinációs zár feltörése (Kód: 042)
+    function unlockWaxSeal() {
+      const entered = (inputSealCode.value || "").trim();
+      if (!entered) {
+        feedbackPrologue3.textContent = "Kérlek írd be a 3 jegyű kódot!";
+        feedbackPrologue3.className = "feedback-message show error";
+        return;
+      }
+
+      if (entered === "042") {
+        playChime();
+        waxSealBtn.classList.add("broken");
+        sealInputContainer.classList.add("hidden");
+        btnToggleSealHint.classList.add("hidden");
+        sealHintText.classList.add("hidden");
+        feedbackPrologue3.textContent = "Helyes kombináció (042)! A viaszpecsét megtört! 🎉";
+        feedbackPrologue3.className = "feedback-message show success";
+        triggerCelebration();
+        btnStartPhysicalHunt.classList.remove("hidden");
+      } else {
+        prologueStep3.classList.add("shake");
+        setTimeout(() => prologueStep3.classList.remove("shake"), 450);
+        feedbackPrologue3.textContent = "A mechanika elakadt. Nem ez a helyes kód! Nézd át a kizárásokat, vagy kérj segítséget.";
+        feedbackPrologue3.className = "feedback-message show error";
+      }
+    }
+
+    btnUnlockSeal.addEventListener("click", unlockWaxSeal);
+
+    inputSealCode.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        unlockWaxSeal();
+      }
+    });
+
+    btnToggleSealHint.addEventListener("click", () => {
+      sealHintText.classList.toggle("hidden");
+    });
+
     waxSealBtn.addEventListener("click", () => {
-      if (waxSealBtn.classList.contains("broken")) return;
-      playChime();
-      waxSealBtn.classList.add("broken");
-      waxSealHint.textContent = "A pecsét megtört!";
-      feedbackPrologue3.textContent = "A fizikai cédulák aktiválódtak a szobában! 🎉";
-      feedbackPrologue3.className = "feedback-message show success";
-      triggerCelebration();
-      btnStartPhysicalHunt.classList.remove("hidden");
+      if (!waxSealBtn.classList.contains("broken")) {
+        inputSealCode.focus();
+      }
     });
 
     btnStartPhysicalHunt.addEventListener("click", () => {
